@@ -6,7 +6,7 @@ import json
 import requests
 
 
-def emotion_detector(text_to_analyze):
+def emotion_detector(text_to_analyse):
     """
     Function to detect emotions in a text using Watson NLP API.
     """
@@ -14,7 +14,7 @@ def emotion_detector(text_to_analyze):
         'https://sn-watson-emotion.labs.skills.network/v1/'
         'watson.runtime.nlp.v1/NlpService/EmotionPredict'
     )
-    myobj = {"raw_document": {"text": text_to_analyze}}
+    myobj = {"raw_document": {"text": text_to_analyse}}
     header = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
 
     try:
@@ -23,12 +23,12 @@ def emotion_detector(text_to_analyze):
         response_text = response.text
     except requests.exceptions.RequestException:
         # Fallback simulation for local/offline environments outside IBM Cloud IDE
-        if not text_to_analyze or not text_to_analyze.strip():
+        if not text_to_analyse or not text_to_analyse.strip():
             status_code = 400
             response_text = "{}"
         else:
             status_code = 200
-            lower = text_to_analyze.lower()
+            lower = text_to_analyse.lower()
             if any(w in lower for w in ["glad", "happy", "love", "joy", "fun", "great"]):
                 emotions = {
                     'anger': 0.005146057,
